@@ -43,6 +43,12 @@ if [ $? -gt 0 ]; then
   exit 1
 fi
 
+if [ "$CONCURRENCY" -gt "1" ]; then
+  echo "===> Setting gitlab-runner concurrency..."
+  cat ${CONFIG_FILE} | sed "s/concurrent =.*/concurrent = $CONCURRENCY/" > ${CONFIG_FILE}.updated
+  mv ${CONFIG_FILE}.updated ${CONFIG_FILE}
+fi
+
 echo "===> Current version of gitlab-runner:"
 gitlab-runner --version
 
