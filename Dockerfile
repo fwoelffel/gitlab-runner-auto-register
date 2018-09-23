@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-runner:v11.2.0
+FROM gitlab/gitlab-runner:latest
 
 ADD entrypoint /
 RUN chmod +x /entrypoint
