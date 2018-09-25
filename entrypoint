@@ -36,7 +36,9 @@ trap "gitlab-runner stop" SIGTERM
 
 echo "===> Running gitlab-runner register..."
 export REGISTER_NON_INTERACTIVE=true
-export RUNNER_NAME="$HOSTNAME"
+if [ -z "$RUNNER_NAME" ]; then
+  export RUNNER_NAME="$HOSTNAME"
+fi
 gitlab-runner register
 if [ $? -gt 0 ]; then
   echo "===> ERROR: Registration failed!"
